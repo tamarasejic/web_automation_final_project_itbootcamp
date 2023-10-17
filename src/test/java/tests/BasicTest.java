@@ -8,6 +8,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.NavPage;
 
 import java.time.Duration;
 
@@ -15,6 +16,7 @@ public abstract class BasicTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected String baseUrl = "https://vue-demo.daniel-avellaneda.com";
+    protected NavPage navPage;
 
 
     @BeforeClass
@@ -26,6 +28,7 @@ public abstract class BasicTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         context.setAttribute("driver", driver);
+        navPage = new NavPage(driver, wait);
     }
 
     @BeforeMethod
