@@ -60,4 +60,24 @@ public class LoginTests extends BasicTest{
                 "Url should be " + baseUrl  + "/login");
     }
 
+    @Test(priority = 4, dataProvider = "invalid-password-admin-user",
+            dataProviderClass = DataProviderClass.class, retryAnalyzer = RetryAnalyzer.class)
+    public void displaysErrorsWhenPasswordIsWrong(String email, String password) {
+        navPage.clickOnLoginButton();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+
+        loginPage.clickOnLoginButton();
+        messagePopUpPage.waitForErrorPopUpToBeVisible();
+
+        Assert.assertEquals(messagePopUpPage.getErrorPopUpMessageText(),
+                "Wrong password",
+                "Error pop up message text should be 'Wrong password'.");
+
+        Assert.assertEquals(driver.getCurrentUrl(),
+                baseUrl + "/login",
+                "Url should be " + baseUrl  + "/login");
+    }
+
 }

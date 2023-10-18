@@ -9,4 +9,10 @@ public class DataProviderClass {
         return new Object[][] { { "non-existing-user@gmal.com", "password123" }};
     }
 
+    @DataProvider(name = "invalid-password-admin-user")
+    public static Object [] [] dataPInvalidPasswordAdminMethod () {
+                                // {{String email, String password}}
+        return new Object[][] { { "admin@admin.com", "password123" }};
+    }
+
 }
