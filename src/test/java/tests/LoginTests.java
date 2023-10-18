@@ -95,4 +95,16 @@ public class LoginTests extends BasicTest{
                 .until(ExpectedConditions.urlContains("/home"));
     }
 
+    @Test(priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void logout() {
+        Assert.assertTrue(navPage.getLogoutButton().isDisplayed(),
+                "Logout button should be visible.");
+
+        navPage.clickOnLogoutButton();
+
+        wait
+                .withMessage("User should be redirected to " + baseUrl  + "/login")
+                .until(ExpectedConditions.urlContains("/login"));
+    }
+
 }
