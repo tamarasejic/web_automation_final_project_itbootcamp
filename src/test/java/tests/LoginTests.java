@@ -80,4 +80,19 @@ public class LoginTests extends BasicTest{
                 "Url should be " + baseUrl  + "/login");
     }
 
+    @Test(priority = 5, dataProvider = "valid-admin-user",
+            dataProviderClass = DataProviderClass.class, retryAnalyzer = RetryAnalyzer.class)
+    public void SuccessfulLogin(String email, String password) {
+        navPage.clickOnLoginButton();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+
+        loginPage.clickOnLoginButton();
+
+        wait
+                .withMessage("User should be redirected to " + baseUrl  + "/home")
+                .until(ExpectedConditions.urlContains("/home"));
+    }
+
 }
