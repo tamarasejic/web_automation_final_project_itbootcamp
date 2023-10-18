@@ -1,5 +1,6 @@
 package tests;
 
+import data_provider.DataProviderClass;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -37,6 +38,26 @@ public class LoginTests extends BasicTest{
                 "password",
                 "Value of the 'type' attribute for the 'Password' input should be 'password'");
 
+    }
+
+    @Test(priority = 3, dataProvider = "non-existing-user",
+            dataProviderClass = DataProviderClass.class, retryAnalyzer = RetryAnalyzer.class)
+    public void displaysErrorsWhenUserDoesNotExist(String email, String password) {
+        navPage.clickOnLoginButton();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+
+        loginPage.clickOnLoginButton();
+        messagePopUpPage.waitForErrorPopUpToBeVisible();
+
+        Assert.assertEquals(messagePopUpPage.getErrorPopUpMessageText(),
+                "User does not exists",
+                "Error pop up message text should be 'User does not exists'.");
+
+        Assert.assertEquals(driver.getCurrentUrl(),
+                baseUrl + "/login",
+                "Url should be " + baseUrl  + "/login");
     }
 
 }

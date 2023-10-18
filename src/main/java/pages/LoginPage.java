@@ -30,4 +30,11 @@ public class LoginPage extends BasicPage{
     public String getPasswordInputTypeValue(){
         return getPasswordInput().getAttribute("type");
     }
+    public WebElement getLoginButton(){
+        return driver.findElement(By.cssSelector("[type=\"submit\"]"));
+    }
+    public void clickOnLoginButton(){
+        getLoginButton().click();
+    }
+
 }
