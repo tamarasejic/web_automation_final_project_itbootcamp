@@ -1,6 +1,8 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import data_provider.DataProviderClass;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -66,6 +68,40 @@ public class SignupTests extends BasicTest{
         Assert.assertEquals(driver.getCurrentUrl(),
                 baseUrl + "/signup",
                 "Url should be " + baseUrl  + "/signup");
+    }
+
+    @Test(priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void successfulSignup() {
+        Faker faker = new Faker();
+        String name = faker.name().fullName();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+
+        navPage.clickOnSignupButton();
+
+        signupPage.clearAndTypeName(name);
+        signupPage.clearAndTypeEmail(email);
+        signupPage.clearAndTypePassword(password);
+        signupPage.clearAndTypeConfirmPassword(password);
+
+        signupPage.clickOnSignupButton();
+
+        wait
+                .withMessage("User should be redirected to '" + baseUrl + "/home")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/home"));
+
+        wait
+                .withMessage("Dialog window should be visible.")
+                .until(ExpectedConditions.visibilityOf(messagePopUpPage.getDialogWindow()));
+
+        Assert.assertEquals(messagePopUpPage.getDialogMessageText(),
+                "IMPORTANT: Verify your account",
+                "Dialog pop up message text should be 'IMPORTANT: Verify your account'.");
+
+        messagePopUpPage.clickOnCloseButton();
+
+        navPage.clickOnLogoutButton();
+
     }
 
 }

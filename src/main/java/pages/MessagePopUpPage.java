@@ -26,5 +26,19 @@ public class MessagePopUpPage extends BasicPage{
         return getErrorPopUpMessage().getText();
     }
 
+    public WebElement getDialogWindow(){
+        return driver.findElement(By.className("dlgVerifyAccount"));
+    }
+    public String getDialogMessageText()  {
+        return getDialogWindow().getText();
+    }
+
+    public WebElement getCloseButton(){
+        return driver.findElement(By.className("btnClose"));
+    }
+    public void clickOnCloseButton(){
+        getCloseButton().click();
+    }
+
 
 }
