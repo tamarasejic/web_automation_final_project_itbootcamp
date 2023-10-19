@@ -80,9 +80,9 @@ public class LoginTests extends BasicTest{
                 "Url should be " + baseUrl  + "/login");
     }
 
-    @Test(priority = 5, dataProvider = "valid-admin-user",
+    @Test(priority = 5, dataProvider = "valid-user",
             dataProviderClass = DataProviderClass.class, retryAnalyzer = RetryAnalyzer.class)
-    public void SuccessfulLogin(String email, String password) {
+    public void VerifySuccessfulLoginAndLogoutWithValidCredentials(String email, String password) {
         navPage.clickOnLoginButton();
 
         loginPage.clearAndTypeEmail(email);
@@ -93,10 +93,7 @@ public class LoginTests extends BasicTest{
         wait
                 .withMessage("User should be redirected to " + baseUrl  + "/home")
                 .until(ExpectedConditions.urlContains("/home"));
-    }
 
-    @Test(priority = 6, retryAnalyzer = RetryAnalyzer.class)
-    public void logout() {
         Assert.assertTrue(navPage.getLogoutButton().isDisplayed(),
                 "Logout button should be visible.");
 

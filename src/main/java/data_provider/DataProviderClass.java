@@ -15,10 +15,10 @@ public class DataProviderClass {
         return new Object[][] { { "admin@admin.com", "password123" }};
     }
 
-    @DataProvider(name = "valid-admin-user")
-    public static Object [] [] dataPValidAdminMethod () {
+    @DataProvider(name = "valid-user")
+    public static Object [] [] dataPValidUserMethod () {
                                 // {{String email, String password}}
-        return new Object[][] { { "admin@admin.com", "12345" }};
+        return new Object[][] { { "admin@admin.com", "12345" }, { "user@user.com", "12345" }};
     }
 
 }
