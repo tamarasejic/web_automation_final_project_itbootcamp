@@ -9,10 +9,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.LoginPage;
-import pages.MessagePopUpPage;
-import pages.NavPage;
-import pages.SignupPage;
+import pages.*;
 
 import java.time.Duration;
 
@@ -25,6 +22,7 @@ public abstract class BasicTest {
     protected MessagePopUpPage messagePopUpPage;
     protected String baseUrl;
     protected SignupPage signupPage;
+    protected CitiesPage citiesPage;
 
 
     @BeforeClass
@@ -42,6 +40,7 @@ public abstract class BasicTest {
         config = new ConfigFileReader();
         baseUrl = config.getBaseUrl();
         signupPage = new SignupPage(driver, wait);
+        citiesPage = new CitiesPage(driver, wait);
     }
 
     @BeforeMethod
