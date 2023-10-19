@@ -1,5 +1,6 @@
 package tests;
 
+import data_provider.ConfigFileReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,10 +18,11 @@ import java.time.Duration;
 public abstract class BasicTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected String baseUrl = "https://vue-demo.daniel-avellaneda.com";
+    protected ConfigFileReader config;
     protected NavPage navPage;
     protected LoginPage loginPage;
     protected MessagePopUpPage messagePopUpPage;
+    protected String baseUrl;
 
 
     @BeforeClass
@@ -35,6 +37,8 @@ public abstract class BasicTest {
         navPage = new NavPage(driver, wait);
         loginPage = new LoginPage(driver, wait);
         messagePopUpPage = new MessagePopUpPage(driver, wait);
+        config = new ConfigFileReader();
+        baseUrl = config.getBaseUrl();
     }
 
     @BeforeMethod
