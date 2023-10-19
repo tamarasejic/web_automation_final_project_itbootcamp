@@ -1,5 +1,6 @@
 package tests;
 
+import data_provider.DataProviderClass;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -38,6 +39,33 @@ public class SignupTests extends BasicTest{
         Assert.assertEquals(signupPage.getConfirmPasswordInputTypeValue(),
                 "password",
                 "Value of the 'type' attribute for the 'Confirm Password' input should be 'password'");
+    }
+
+    @Test(priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    public void displaysErrorsWhenUserAlreadyExists() {
+        String name = "Another User";
+
+        navPage.clickOnSignupButton();
+
+        Assert.assertEquals(driver.getCurrentUrl(),
+                baseUrl + "/signup",
+                "Url should be " + baseUrl  + "/signup");
+
+        signupPage.clearAndTypeName(name);
+        signupPage.clearAndTypeEmail(config.getAdminEmail());
+        signupPage.clearAndTypePassword(config.getAdminPassword());
+        signupPage.clearAndTypeConfirmPassword(config.getAdminPassword());
+
+        signupPage.clickOnSignupButton();
+        messagePopUpPage.waitForErrorPopUpToBeVisible();
+
+        Assert.assertEquals(messagePopUpPage.getErrorPopUpMessageText(),
+                "E-mail already exists",
+                "Error pop up message text should be 'E-mail already exists'.");
+
+        Assert.assertEquals(driver.getCurrentUrl(),
+                baseUrl + "/signup",
+                "Url should be " + baseUrl  + "/signup");
     }
 
 }

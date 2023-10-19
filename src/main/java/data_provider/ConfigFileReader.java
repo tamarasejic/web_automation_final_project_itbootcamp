@@ -34,4 +34,16 @@ public class ConfigFileReader {
         else throw new RuntimeException("baseUrl not specified in the Configuration.properties file.");
     }
 
+    public String getAdminEmail() {
+        String adminEmail = properties.getProperty("adminEmail");
+        if (adminEmail != null) return adminEmail;
+        else throw new RuntimeException("adminEmail not specified in the Configuration.properties file.");
+    }
+
+    public String getAdminPassword() {
+        String adminPassword = properties.getProperty("adminPassword");
+        if (adminPassword != null) return adminPassword;
+        else throw new RuntimeException("adminPassword not specified in the Configuration.properties file.");
+    }
+
 }
