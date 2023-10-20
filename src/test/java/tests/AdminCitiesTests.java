@@ -9,6 +9,7 @@ import retry.RetryAnalyzer;
 public class AdminCitiesTests extends BasicTest{
 
     private String cityName;
+    private String cityEditedName;
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyTheUrl() {
@@ -71,6 +72,41 @@ public class AdminCitiesTests extends BasicTest{
                         .visibilityOf(citiesPage.getCreateEditDialog()));
 
         citiesPage.clearAndTypeName(cityName);
+        citiesPage.clickOnDialogSaveButton();
+
+        wait
+                .withMessage("Saved city pop up should be visible.")
+                .until(ExpectedConditions
+                        .visibilityOf(messagePopUpPage.getSavedCityPopup()));
+
+        Assert.assertTrue(messagePopUpPage.getSavedCityPopupMessageText()
+                        .contains("Saved successfully"),
+                "Saved city pop up message text should contain 'Saved successfully'.");
+    }
+
+    @Test(priority = 4, retryAnalyzer = RetryAnalyzer.class)
+    public void editCity() {
+
+        cityEditedName = cityName + " Edited";
+
+        navPage.clickOnAdminButton();
+        navPage.clickOnCitiesButton();
+
+        wait
+                .withMessage("User should be redirected to '" + baseUrl + "/admin/cities")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/admin/cities"));
+
+        citiesPage.clearAndTypeSearch(cityName);
+        citiesPage.waitForNumberOfRowsToBe(1);
+
+        citiesPage.clickOnEditButtonFromTableRow();
+
+        wait
+                .withMessage("Create/Edit new city dialog should be visible.")
+                .until(ExpectedConditions
+                        .visibilityOf(citiesPage.getCreateEditDialog()));
+
+        citiesPage.clearAndTypeEditedName(cityEditedName);
         citiesPage.clickOnDialogSaveButton();
 
         wait

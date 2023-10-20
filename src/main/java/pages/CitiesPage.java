@@ -1,8 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CitiesPage extends BasicPage{
@@ -34,6 +36,29 @@ public class CitiesPage extends BasicPage{
     }
     public void clickOnDialogSaveButton(){
         getDialogSaveButton().click();
+    }
+    public WebElement getSearchInput(){
+        return driver.findElement(By.id("search"));
+    }
+    public void clearAndTypeSearch(String cityName) {
+        getSearchInput().clear();
+        getSearchInput().sendKeys(cityName);
+    }
+    public void waitForNumberOfRowsToBe(int numberOfRowsToBe){
+        wait
+                .withMessage("Number of rows should be" + numberOfRowsToBe + ".")
+                .until(ExpectedConditions
+                        .numberOfElementsToBe(By.cssSelector(".v-data-table__wrapper tbody > tr"), numberOfRowsToBe));
+        driver.findElements(By.cssSelector(".v-data-table__wrapper tbody > tr"));
+    }
+    public WebElement getEditButtonFromTableRow(){
+        return driver.findElement(By.xpath("//tbody /tr[1] /td //*[@id='edit']"));
+    }
+    public void clickOnEditButtonFromTableRow(){
+        getEditButtonFromTableRow().click();
+    }
+    public void clearAndTypeEditedName(String editedName){
+        getNameInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), editedName);
     }
 
 }
