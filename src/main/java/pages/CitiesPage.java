@@ -29,5 +29,11 @@ public class CitiesPage extends BasicPage{
     public String getNameInputTypeValue(){
         return getNameInput().getAttribute("type");
     }
+    public WebElement getDialogSaveButton(){
+        return driver.findElement(By.className("btnSave"));
+    }
+    public void clickOnDialogSaveButton(){
+        getDialogSaveButton().click();
+    }
 
 }

@@ -39,6 +39,15 @@ public class MessagePopUpPage extends BasicPage{
     public void clickOnCloseButton(){
         getCloseButton().click();
     }
+    public WebElement getSavedCityPopup(){
+        return driver.findElement(By.className("success"));
+    }
+    public WebElement getSavedCityPopupMessage(){
+        return driver.findElement(By.cssSelector(".success .v-snack__content"));
+    }
+    public String getSavedCityPopupMessageText(){
+        return getSavedCityPopupMessage().getText();
+    }
 
 
 }
