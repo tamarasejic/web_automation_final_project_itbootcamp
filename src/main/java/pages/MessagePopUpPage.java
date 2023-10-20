@@ -48,6 +48,31 @@ public class MessagePopUpPage extends BasicPage{
     public String getSavedCityPopupMessageText(){
         return getSavedCityPopupMessage().getText();
     }
+    public WebElement getDeleteWarningDialog() {
+        return driver.findElement(By.className("rounded-0"));
+    }
+    public void waitForDeleteWarningDialogToBeVisible(){
+        wait
+                .withMessage("Delete warning dialog pop up should be visible.")
+                .until(ExpectedConditions.visibilityOf(getDeleteWarningDialog()));
+    }
+    public WebElement getDeleteButton(){
+        return driver.findElement(By.className("text--lighten3"));
+    }
+    public void clickOnDeleteButton(){
+        getDeleteButton().click();
+    }
+    public WebElement getDeleteSuccessPopUp() {
+        return driver.findElement(By.cssSelector(".success .v-snack__content"));
+    }
+    public void waitDeleteSuccessPopUpToBeVisible(){
+        wait
+                .withMessage("Delete success message pop up should be visible.")
+                .until(ExpectedConditions.visibilityOf(getDeleteSuccessPopUp()));
+    }
+    public String getDeleteSuccessPopUpText() {
+        return getDeleteSuccessPopUp().getText();
+    }
 
 
 }

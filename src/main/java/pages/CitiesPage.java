@@ -66,5 +66,11 @@ public class CitiesPage extends BasicPage{
     public String getNameFromTableRowText(){
         return getNameFromTableRow().getText();
     }
+    public WebElement getDeleteButtonFromTableRow(){
+        return driver.findElement(By.xpath("//tbody /tr[1] /td //*[@id='delete']"));
+    }
+    public void clickOnDeleteButtonFromTableRow(){
+        getDeleteButtonFromTableRow().click();
+    }
 
 }

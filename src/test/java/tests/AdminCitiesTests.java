@@ -136,4 +136,32 @@ public class AdminCitiesTests extends BasicTest{
                 "City name result from table should match searched city name.");
     }
 
+    @Test(priority = 6, retryAnalyzer = RetryAnalyzer.class)
+    public void deleteCity() {
+        navPage.clickOnAdminButton();
+        navPage.clickOnCitiesButton();
+
+        wait
+                .withMessage("User should be redirected to '" + baseUrl + "/admin/cities")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/admin/cities"));
+
+        citiesPage.clearAndTypeSearch(cityEditedName);
+        citiesPage.waitForNumberOfRowsToBe(1);
+
+        Assert.assertEquals(citiesPage.getNameFromTableRowText(),
+                cityEditedName,
+                "City name result from table should match searched city name.");
+
+        citiesPage.clickOnDeleteButtonFromTableRow();
+
+        messagePopUpPage.waitForDeleteWarningDialogToBeVisible();
+        messagePopUpPage.clickOnDeleteButton();
+
+        messagePopUpPage.waitDeleteSuccessPopUpToBeVisible();
+
+        Assert.assertTrue(messagePopUpPage.getDeleteSuccessPopUpText()
+                        .contains("Deleted successfully"),
+                "Delete success message pop up text should contain 'Deleted successfully'.");
+    }
+
 }
