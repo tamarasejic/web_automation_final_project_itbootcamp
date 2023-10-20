@@ -60,5 +60,11 @@ public class CitiesPage extends BasicPage{
     public void clearAndTypeEditedName(String editedName){
         getNameInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), editedName);
     }
+    public WebElement getNameFromTableRow(){
+        return driver.findElement(By.xpath("//tbody /tr[1] /td[2]"));
+    }
+    public String getNameFromTableRowText(){
+        return getNameFromTableRow().getText();
+    }
 
 }

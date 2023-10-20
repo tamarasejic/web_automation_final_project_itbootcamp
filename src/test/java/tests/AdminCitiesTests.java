@@ -119,4 +119,21 @@ public class AdminCitiesTests extends BasicTest{
                 "Saved city pop up message text should contain 'Saved successfully'.");
     }
 
+    @Test(priority = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void searchCity() {
+        navPage.clickOnAdminButton();
+        navPage.clickOnCitiesButton();
+
+        wait
+                .withMessage("User should be redirected to '" + baseUrl + "/admin/cities")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/admin/cities"));
+
+        citiesPage.clearAndTypeSearch(cityEditedName);
+        citiesPage.waitForNumberOfRowsToBe(1);
+
+        Assert.assertEquals(citiesPage.getNameFromTableRowText(),
+                cityEditedName,
+                "City name result from table should match searched city name.");
+    }
+
 }
