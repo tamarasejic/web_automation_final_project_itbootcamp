@@ -23,6 +23,7 @@ public abstract class BasicTest {
     protected String baseUrl;
     protected SignupPage signupPage;
     protected CitiesPage citiesPage;
+    protected LocaleHomePage localeHomePage;
 
 
     @BeforeClass
@@ -41,6 +42,7 @@ public abstract class BasicTest {
         baseUrl = config.getBaseUrl();
         signupPage = new SignupPage(driver, wait);
         citiesPage = new CitiesPage(driver, wait);
+        localeHomePage = new LocaleHomePage(driver, wait);
     }
 
     @BeforeMethod
