@@ -33,4 +33,14 @@ public class LocaleTests extends BasicTest{
                 "Home page title in EN locale should be 'Landing'.");
     }
 
+    @Test(priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    public void setLocaleToCN() {
+        navPage.clickOnLanguageButton();
+        navPage.clickOnLanguageByISO2LetterCodeText("CN");
+
+        Assert.assertEquals(localeHomePage.getHeaderTitleText(),
+                "首页",
+                "Home page title in CN locale should be '首页'.");
+    }
+
 }
