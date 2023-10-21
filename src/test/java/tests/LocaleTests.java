@@ -50,7 +50,7 @@ public class LocaleTests extends BasicTest{
 
         Assert.assertEquals(localeHomePage.getHeaderTitleText(),
                 "Page d'atterrissage",
-                "Home page title in CN locale should be 'Page d'atterrissage'.");
+                "Home page title in FR locale should be 'Page d'atterrissage'.");
     }
 
 }
