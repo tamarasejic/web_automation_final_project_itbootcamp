@@ -22,4 +22,13 @@ public class AuthRoutesTests extends BasicTest{
                 .withMessage("User should be redirected to '" + baseUrl + "/login")
                 .until(ExpectedConditions.urlToBe(baseUrl + "/login"));
     }
+
+    @Test(priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    public void forbidsVisitsToProfileUrlIfNotAuthenticated() {
+        driver.navigate().to(baseUrl + "/profile");
+
+        wait
+                .withMessage("User should be redirected to '" + baseUrl + "/login")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/login"));
+    }
 }
