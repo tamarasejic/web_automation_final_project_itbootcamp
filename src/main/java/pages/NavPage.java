@@ -56,6 +56,12 @@ public class NavPage extends BasicPage{
     public void clickOnCitiesButton(){
         getCitiesButton().click();
     }
+    public WebElement getMyProfileButton(){
+        return driver.findElement(By.className("btnProfile"));
+    }
+    public void clickOnMyProfileButton(){
+        getMyProfileButton().click();
+    }
 
 
 }
