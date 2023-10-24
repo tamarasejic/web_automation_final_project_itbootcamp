@@ -92,4 +92,73 @@ public class ProfileTests extends BasicTest{
                 .withMessage("User should be redirected to " + baseUrl  + "/login")
                 .until(ExpectedConditions.urlContains("/login"));
     }
+
+    @Test(priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    public void editsProfile() {
+        String email = config.getAdminEmail();
+        String password = config.getAdminPassword();
+        String name = "Marko Markovic";
+        String phone = "+38161234568";
+        String city = "Bucaramanga";
+        String country = "Spain";
+        String twitter = "https://twitter.com/profile/milan1232";
+        String github = "https://github.com/tamarasejic";
+
+        navPage.clickOnLoginButton();
+
+        loginPage.clearAndTypeEmail(email);
+        loginPage.clearAndTypePassword(password);
+        loginPage.clickOnLoginButton();
+        wait
+                .withMessage("Url should be " + baseUrl + "/home")
+                .until(ExpectedConditions.urlContains("/home"));
+
+        navPage.clickOnMyProfileButton();
+        wait
+                .withMessage("Url should be " + baseUrl + "/profile")
+                .until(ExpectedConditions.urlToBe(baseUrl + "/profile"));
+
+        profilePage.clearAndTypeName(name);
+        profilePage.clearAndTypePhone(phone);
+        profilePage.clearAndTypeCity(city);
+        profilePage.clearAndTypeCountry(country);
+        profilePage.clearAndTypeTwitter(twitter);
+        profilePage.clearAndTypeGitHub(github);
+
+        profilePage.clickOnSaveButton();
+        messagePopUpPage.waitSavedProfileEditSuccessPopUpToBeVisible();
+
+        Assert.assertTrue(messagePopUpPage.getSavedProfileEditSuccessPopUpText()
+                        .contains("Profile saved successfuly"),
+                "Saved profile pop up message text should contain 'Profile saved successfuly'.");
+
+        Assert.assertEquals(profilePage.getNameValueValue(),
+                name,
+                "Value of the 'value' attribute for the 'Name' input should be '" + name + "'");
+
+        Assert.assertEquals(profilePage.getPhoneValueValue(),
+                phone,
+                "Value of the 'value' attribute for the 'Phone' input should be '" + phone + "'");
+
+        Assert.assertEquals(profilePage.getCityValueValue(),
+                city,
+                "Value of the 'value' attribute for the 'City' input should be '" + city + "'");
+
+        Assert.assertEquals(profilePage.getCountryValueValue(),
+                country,
+                "Value of the 'value' attribute for the 'Country' input should be '" + country + "'");
+
+        Assert.assertEquals(profilePage.getTwitterValueValue(),
+                twitter,
+                "Value of the 'value' attribute for the 'Twitter' input should be '" + twitter + "'");
+
+        Assert.assertEquals(profilePage.getGitHubValueValue(),
+                github,
+                "Value of the 'value' attribute for the 'GitHub' input should be '" + github + "'");
+
+        navPage.clickOnLogoutButton();
+        wait
+                .withMessage("User should be redirected to " + baseUrl  + "/login")
+                .until(ExpectedConditions.urlContains("/login"));
+    }
 }

@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProfilePage extends BasicPage{
@@ -65,6 +62,53 @@ public class ProfilePage extends BasicPage{
     public String getPhoneInputTypeValue(){
         return getPhoneInput().getAttribute("type");
     }
+
+    public void clearAndTypeName(String name){
+        getNameInput().click();
+        getNameInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), name);
+    }
+    public void clearAndTypePhone(String phone){
+        getPhoneInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), phone);
+    }
+    public void clearAndTypeCity(String city){
+        getCityInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), city);
+        getCityInput().sendKeys(Keys.ENTER);
+    }
+    public void clearAndTypeCountry(String country){
+        getCountryInput().click();
+        getCountryInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), country);
+    }
+    public void clearAndTypeTwitter(String twitter){
+        getTwitterInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), twitter);
+    }
+    public void clearAndTypeGitHub(String github){
+        getGitHubInput().sendKeys(Keys.chord(Keys.CONTROL, "a"), github);
+    }
+    public WebElement getSaveButton(){
+        return driver.findElement(By.className("btnSave"));
+    }
+    public void clickOnSaveButton(){
+        getSaveButton().click();
+    }
+    public String getNameValueValue(){
+        return getNameInput().getAttribute("value");
+    }
+    public String getPhoneValueValue(){
+        return getPhoneInput().getAttribute("value");
+    }
+    public String getCityValueValue(){
+        return getCityInput().getAttribute("value");
+    }
+    public String getCountryValueValue(){
+        return getCountryInput().getAttribute("value");
+    }
+    public String getTwitterValueValue(){
+        return getTwitterInput().getAttribute("value");
+    }
+    public String getGitHubValueValue(){
+        return getGitHubInput().getAttribute("value");
+    }
+
 
 
 }

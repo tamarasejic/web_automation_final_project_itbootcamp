@@ -73,6 +73,17 @@ public class MessagePopUpPage extends BasicPage{
     public String getDeleteSuccessPopUpText() {
         return getDeleteSuccessPopUp().getText();
     }
+    public WebElement getSavedProfileEditSuccessPopUp() {
+        return driver.findElement(By.cssSelector(".success .v-snack__content"));
+    }
+    public void waitSavedProfileEditSuccessPopUpToBeVisible(){
+        wait
+                .withMessage("Saved success message pop up should be visible.")
+                .until(ExpectedConditions.visibilityOf(getSavedProfileEditSuccessPopUp()));
+    }
+    public String getSavedProfileEditSuccessPopUpText() {
+        return getSavedProfileEditSuccessPopUp().getText();
+    }
 
 
 }
